@@ -39,27 +39,36 @@
 }
 
 [data-theme="charcoal"] {
-  --paper-color: #121213;
-  --paper-dark: #1A1A1C;
-  --paper-card: #1E1E20;
-  --paper-border: #E8E3D7;
-  --paper-rule: rgba(232,227,215,0.22);
-  --paper-rule-strong: rgba(232,227,215,0.65);
-  --ink-color: #EFECE4;
-  --ink-muted: #ACA79B;
-  --ink-subtle: #7A7569;
-  --stamp-red: #E84D42;
-  --stamp-red-tint: rgba(232,77,66,0.14);
-  --stamp-blue: #5C8AE6;
-  --stamp-blue-tint: rgba(92,138,230,0.14);
-  --stamp-green: #38A169;
-  --stamp-green-tint: rgba(56,161,105,0.14);
-  --stamp-gold: #E2B258;
-  --stamp-gold-tint: rgba(226,178,88,0.14);
-  --wax-red: #B83232;
-  --shadow-paper: 2px 3px 0px rgba(232,227,215,0.7);
-  --shadow-paper-hover: 6px 8px 0px rgba(232,227,215,0.85);
-  --shadow-sticker: 4px 6px 16px rgba(0,0,0,0.5);
+  /* Deep dark backgrounds — layered for depth */
+  --paper-color: #0C0C0E;
+  --paper-dark: #111114;
+  --paper-card: #18181C;
+  --paper-border: #D4CFC3;
+
+  /* Rules & dividers */
+  --paper-rule: rgba(212,207,195,0.18);
+  --paper-rule-strong: rgba(212,207,195,0.55);
+
+  /* Typography */
+  --ink-color: #F0EDE4;
+  --ink-muted: #B0AA9E;
+  --ink-subtle: #706A60;
+
+  /* Accent stamps — brighter & more vivid on dark */
+  --stamp-red: #FF5A4E;
+  --stamp-red-tint: rgba(255,90,78,0.16);
+  --stamp-blue: #6E9FFF;
+  --stamp-blue-tint: rgba(110,159,255,0.15);
+  --stamp-green: #3FBF74;
+  --stamp-green-tint: rgba(63,191,116,0.15);
+  --stamp-gold: #F0C060;
+  --stamp-gold-tint: rgba(240,192,96,0.15);
+  --wax-red: #C43232;
+
+  /* Shadows — subtle glow effect in dark mode */
+  --shadow-paper: 2px 3px 0px rgba(255,255,255,0.08), 0 0 20px rgba(0,0,0,0.9);
+  --shadow-paper-hover: 6px 8px 0px rgba(255,90,78,0.3), 0 0 30px rgba(0,0,0,0.95);
+  --shadow-sticker: 4px 6px 20px rgba(0,0,0,0.75), 0 0 12px rgba(255,90,78,0.1);
 }
 
 /* --------------------------------------------------
@@ -1031,4 +1040,158 @@ body.cursor-text .cursor-label { transform: translate(-50%,-50%) scale(1); font-
   .modal-paper { border: none !important; box-shadow: none !important; padding: 0 !important; max-height: none !important; overflow: visible !important; }
   .dossier-document { border: none !important; box-shadow: none !important; padding: 0 !important; }
   body { background-color: #fff !important; color: #000 !important; }
+}
+
+
+/* ==========================================================================
+   27. DARK THEME (CHARCOAL) — ENHANCED OVERRIDES
+   ========================================================================== */
+
+/* Richer background gradient on body */
+[data-theme="charcoal"] body.editorial-body {
+  background: radial-gradient(ellipse at top center, #161618 0%, #0C0C0E 70%);
+}
+
+/* Preloader — dark cinematic plate */
+[data-theme="charcoal"] .preloader-plate {
+  background-color: #111114;
+  border-color: rgba(212,207,195,0.35);
+  box-shadow: 0 0 60px rgba(255,90,78,0.08), 8px 8px 0 rgba(0,0,0,0.9);
+}
+[data-theme="charcoal"] .preloader-bar {
+  background: linear-gradient(90deg, #FF5A4E, #F0C060);
+  box-shadow: 0 0 10px rgba(255,90,78,0.6);
+}
+[data-theme="charcoal"] .preloader-progress-wrap {
+  background-color: #0C0C0E;
+  border-color: rgba(212,207,195,0.2);
+}
+
+/* Masthead — glowing headline on dark */
+[data-theme="charcoal"] .masthead {
+  background: linear-gradient(180deg, #0C0C0E 0%, #111114 100%);
+  border-bottom-color: rgba(212,207,195,0.2);
+}
+[data-theme="charcoal"] .masthead-title {
+  text-shadow: 0 0 60px rgba(255,90,78,0.15);
+}
+
+/* Nav bar */
+[data-theme="charcoal"] .gazette-nav {
+  background: rgba(12,12,14,0.92);
+  border-bottom-color: rgba(212,207,195,0.15);
+  backdrop-filter: blur(16px);
+}
+
+/* Section dividers glow subtly */
+[data-theme="charcoal"] .section-rule,
+[data-theme="charcoal"] .ornament-rule {
+  border-color: rgba(212,207,195,0.15);
+}
+
+/* Cards — elevated dark surfaces */
+[data-theme="charcoal"] .project-broadsheet,
+[data-theme="charcoal"] .dispatch-card,
+[data-theme="charcoal"] .strength-card,
+[data-theme="charcoal"] .metric-card,
+[data-theme="charcoal"] .classified-block,
+[data-theme="charcoal"] .roster-member,
+[data-theme="charcoal"] .forge-pillar {
+  background-color: #18181C;
+  border-color: rgba(212,207,195,0.18);
+}
+[data-theme="charcoal"] .project-broadsheet:hover,
+[data-theme="charcoal"] .dispatch-card:hover {
+  box-shadow: 0 0 30px rgba(255,90,78,0.12), var(--shadow-paper-hover);
+  border-color: rgba(255,90,78,0.3);
+}
+
+/* Portrait image — subtle glow */
+[data-theme="charcoal"] .hero-portrait-frame,
+[data-theme="charcoal"] .portrait-wrapper {
+  box-shadow: 0 0 40px rgba(255,90,78,0.1), var(--shadow-paper);
+}
+
+/* Scroll tracker glows more in dark mode */
+[data-theme="charcoal"] .scroll-tracker {
+  box-shadow: 0 0 12px var(--stamp-red), 0 0 4px var(--stamp-gold);
+}
+
+/* Contact form — dark inputs */
+[data-theme="charcoal"] .contact-input,
+[data-theme="charcoal"] .contact-textarea {
+  background-color: #111114;
+  border-color: rgba(212,207,195,0.2);
+  color: var(--ink-color);
+}
+[data-theme="charcoal"] .contact-input:focus,
+[data-theme="charcoal"] .contact-textarea:focus {
+  border-color: var(--stamp-red);
+  box-shadow: 0 0 0 3px rgba(255,90,78,0.15);
+}
+
+/* Footer — deepest dark */
+[data-theme="charcoal"] .gazette-footer {
+  background-color: #080809;
+  border-top-color: rgba(212,207,195,0.15);
+}
+
+/* Utility bar */
+[data-theme="charcoal"] .utility-bar {
+  background-color: #0C0C0E;
+  border-bottom-color: rgba(212,207,195,0.1);
+}
+
+/* Modal */
+[data-theme="charcoal"] .modal-paper {
+  background-color: #15151A;
+  border-color: rgba(212,207,195,0.2);
+}
+[data-theme="charcoal"] .modal-top-bar {
+  background-color: #111114;
+  border-bottom-color: rgba(212,207,195,0.15);
+}
+
+/* Paper grain more visible for texture */
+[data-theme="charcoal"] .paper-grain { opacity: 0.09; }
+
+/* Stamp badges — pop more on dark */
+[data-theme="charcoal"] .stamp-badge,
+[data-theme="charcoal"] .role-badge {
+  background-color: #1C1C22;
+  border-color: rgba(212,207,195,0.25);
+}
+
+/* Selection highlight */
+[data-theme="charcoal"] ::selection {
+  background-color: var(--stamp-red);
+  color: #fff;
+}
+
+/* Cursor ring — white tinted in dark mode */
+[data-theme="charcoal"] .cursor-ring {
+  border-color: rgba(240,237,228,0.7);
+}
+
+/* News ticker */
+[data-theme="charcoal"] .news-ticker-strip {
+  background-color: #111114;
+  border-color: rgba(212,207,195,0.15);
+}
+
+/* Case study / dossier panels */
+[data-theme="charcoal"] .dossier-document {
+  background-color: #15151A;
+  border-color: rgba(212,207,195,0.2);
+}
+[data-theme="charcoal"] .dossier-header {
+  background-color: #0C0C0E;
+  border-bottom-color: rgba(212,207,195,0.15);
+}
+
+/* Floating blueprint hover card */
+[data-theme="charcoal"] .floating-blueprint .blueprint-card {
+  background-color: #0F0F14;
+  border-color: rgba(110,159,255,0.35);
+  box-shadow: 0 0 20px rgba(110,159,255,0.12);
 }
