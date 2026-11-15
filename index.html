@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="newsprint">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THE JITESH CHRONICLE — Portfolio of Jitesh Kumar Reddy</title>
+  <meta name="description" content="Official editorial portfolio of Jitesh Kumar Reddy. Computer Science & Engineering undergraduate at Jain University, builder, innovator, and outreach lead at FORGE.">
+  
+  <!-- Fonts: Instrument Serif, Playfair Display, Space Grotesk, JetBrains Mono, Cinzel -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,600;1,6..72,400;1,6..72,600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+
+  <!-- GSAP Core & ScrollTrigger for 60fps kinetic animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="editorial-body">
+  
+  <!-- VINTAGE ROTARY PRESS PRELOADER (Niccolò Miranda signature intro) -->
+  <div class="press-preloader" id="pressPreloader" aria-label="Rotary Press Initialization">
+    <div class="preloader-curtain curtain-top"></div>
+    <div class="preloader-curtain curtain-bottom"></div>
+    <div class="preloader-plate">
+      <div class="preloader-top-stamp">
+        <span class="p-stamp-box">BENGALURU ROTARY PRESS</span>
+        <span class="p-stamp-id">PRESS RUN NO. 2026-01</span>
+      </div>
+      <div class="preloader-headline">INKING EDITORIAL PLATES</div>
+      <div class="preloader-sub">FOUNDED ON EVIDENCE • COMPUTER SCIENCE &amp; ENGINEERING</div>
+      
+      <div class="preloader-progress-wrap">
+        <div class="preloader-bar" id="preloaderBar"></div>
+      </div>
+      
+      <div class="preloader-counter-row">
+        <span class="p-counter-lbl">CYLINDER IMPRESSION:</span>
+        <span class="p-counter-num" id="preloaderNum">00%</span>
+      </div>
+
+      <div class="preloader-seal" id="preloaderSeal">
+        <div class="seal-ring">PASSED FOR PRESS</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Noise Canvas Overlay -->
+  <div class="paper-grain" aria-hidden="true"></div>
+
+  <!-- Custom Magnetic Cursor -->
+  <div class="custom-cursor" id="cursor" aria-hidden="true">
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+    <div class="cursor-label" id="cursorLabel">READ</div>
+  </div>
+
+  <!-- Floating Hover Blueprint Window (Tracks cursor on project links) -->
+  <div class="floating-blueprint" id="floatingBlueprint" aria-hidden="true">
+    <div class="blueprint-card">
+      <div class="bp-header">
+        <span class="bp-tag" id="bpTag">SPECIFICATION</span>
+        <span class="bp-id" id="bpId">DISPATCH 01</span>
+      </div>
+      <div class="bp-grid-graphic">
+        <div class="bp-crosshair ch-tl">+</div>
+        <div class="bp-crosshair ch-tr">+</div>
+        <div class="bp-crosshair ch-bl">+</div>
+        <div class="bp-crosshair ch-br">+</div>
+        <div class="bp-circle"></div>
+        <div class="bp-lines"></div>
+      </div>
+      <div class="bp-title" id="bpTitle">FestOS Operations Engine</div>
+      <div class="bp-meta" id="bpMeta">2,836 DELEGATES • IIM INDORE</div>
+    </div>
+  </div>
+
+  <!-- Page Scroll Tracker Ribbon -->
+  <div class="scroll-tracker" id="scrollTracker" aria-hidden="true"></div>
+
+  <!-- TOP GAZETTE UTILITY BAR -->
+  <aside class="utility-bar" aria-label="Gazette Telemetry &amp; Settings">
+    <div class="utility-content">
+      <div class="utility-group left">
+        <span class="pulse-indicator"><span class="pulse-dot"></span> BROADCASTING LIVE</span>
+        <span class="util-sep">|</span>
+        <span class="geo-coord">BENGALURU, IN 12.9716° N, 77.5946° E</span>
+        <span class="util-sep">|</span>
+        <span class="weather-report"><svg class="weather-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg> 25°C • CLEAR SKY</span>
+      </div>
+      <div class="utility-group center">
+        <span class="date-live" id="liveDate">NOVEMBER 15, 2026</span>
+        <span class="util-sep">•</span>
+        <span class="clock-live" id="liveClock">18:15:00 IST</span>
+        <span class="util-sep">•</span>
+        <span class="edition-tag">SPECIAL ARCHIVAL EDITION</span>
+      </div>
+      <div class="utility-group right">
+        <!-- Audio Synth Toggle -->
+        <button class="audio-btn" id="audioToggle" aria-label="Toggle Sound Effects" title="Toggle Physical Paper &amp; Stamp Sounds">
+          <span class="audio-bars">
+            <span class="bar bar-1"></span>
+            <span class="bar bar-2"></span>
+            <span class="bar bar-3"></span>
+            <span class="bar bar-4"></span>
+          </span>
+          <span class="audio-text" id="audioStatus">AUDIO OFF</span>
+        </button>
+        <span class="util-sep">|</span>
+        <!-- Theme Toggle -->
+        <button class="theme-btn" id="themeToggle" aria-label="Toggle Night/Day Newspaper Theme" title="Toggle Newsprint / Charcoal Mode">
+          <span class="theme-icon">◐</span>
+          <span class="theme-label" id="themeLabel">CHARCOAL</span>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN MASTHEAD -->
+  <header class="masthead" role="banner" id="masthead">
+    <div class="masthead-upper">
+      <div class="edition-stamp">
+        <span class="stamp-box">VOL. MMXXVI</span>
+        <span class="stamp-sub">FOLIO N° 01</span>
+      </div>
+      <div class="masthead-tagline">
+        AN INDEPENDENT CHRONICLE OF COMPUTATIONAL EXPERIMENTS, SYSTEM ARCHITECTURE &amp; CAMPUS INNOVATION
+      </div>
+      <div class="circulation-stamp">
+        <span class="stamp-red-circle">PRINTED IN BENGALURU</span>
+      </div>
+    </div>
+
+    <!-- Grand Typography Title -->
+    <div class="masthead-title-container">
+      <div class="masthead-ornament-left" aria-hidden="true">
+        <svg viewBox="0 0 120 40" class="ornament-svg">
+          <path d="M0,20 Q30,5 60,20 T120,20" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="60" cy="20" r="3" fill="currentColor"/>
+          <line x1="10" y1="26" x2="110" y2="26" stroke="currentColor" stroke-width="0.8"/>
+        </svg>
+      </div>
+      <h1 class="masthead-title gsap-reveal-title">THE JITESH CHRONICLE</h1>
+      <div class="masthead-ornament-right" aria-hidden="true">
+        <svg viewBox="0 0 120 40" class="ornament-svg">
+          <path d="M0,20 Q30,5 60,20 T120,20" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="60" cy="20" r="3" fill="currentColor"/>
+          <line x1="10" y1="26" x2="110" y2="26" stroke="currentColor" stroke-width="0.8"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="masthead-subline">
+      <span>FOUNDED ON EVIDENCE</span>
+      <span class="bullet">♦</span>
+      <span>COMPUTER SCIENCE &amp; ENGINEERING • JAIN UNIVERSITY</span>
+      <span class="bullet">♦</span>
+      <span>CIRCULATED GLOBALLY</span>
+    </div>
+
+    <!-- Navigation Bar styled as Vintage Gazette Menu -->
+    <nav class="gazette-nav" aria-label="Main Navigation">
+      <ul class="nav-links">
+        <li><a href="#front-page" class="nav-item active"><span class="nav-num">[01]</span> FRONT PAGE</a></li>
+        <li><a href="#editorial" class="nav-item"><span class="nav-num">[02]</span> EDITOR'S NOTE</a></li>
+        <li><a href="#dispatches" class="nav-item"><span class="nav-num">[03]</span> WORKS ARCHIVE</a></li>
+        <li><a href="#classifieds" class="nav-item"><span class="nav-num">[04]</span> PATENT CLASSIFIEDS</a></li>
+        <li><a href="#forge" class="nav-item"><span class="nav-num">[05]</span> FORGE DISPATCH</a></li>
+        <li><a href="#telegraph" class="nav-item"><span class="nav-num">[06]</span> TELEGRAPH DESK</a></li>
+      </ul>
+      <div class="nav-cta">
+        <button class="dossier-btn" id="dossierModalBtn" title="View &amp; Print Official Profile Dossier">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          DOSSIER [CV]
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- RUNNING BREAKING NEWS MARQUEE STRIP -->
+  <div class="news-ticker-strip" aria-label="Breaking News Ticker">
+    <div class="ticker-label">BREAKING DISPATCH</div>
+    <div class="ticker-track">
+      <div class="ticker-content">
+        <span>✦ FESTOS COORDINATES 2,836 DELEGATES AT AAROHAN '26 (IIM INDORE)</span>
+        <span>✦ SMART FARMING ASSISTANT CONNECTS SOIL TELEMETRY TO ESP8266 RELAYS (SIH TRACK)</span>
+        <span>✦ TRUSTMESH EXPLORES ZERO-KNOWLEDGE PROOF OF REALITY: "TRUST THE EVENT, NOT THE IDENTITY"</span>
+        <span>✦ EXCHEQUER ARCHITECTS FX TREASURY RING-FENCING ON SUPABASE EDGE FUNCTIONS</span>
+        <span>✦ FORGE INNOVATION CLUB ADVANCES FOUNDER MENTORSHIP UNDER JAIN LAUNCHPAD</span>
+        <span>✦ FIRST-YEAR UNDERGRADUATE CSE AT JAIN UNIVERSITY • EVIDENCE-LED SYSTEM BUILDER</span>
+      </div>
+      <div class="ticker-content" aria-hidden="true">
+        <span>✦ FESTOS COORDINATES 2,836 DELEGATES AT AAROHAN '26 (IIM INDORE)</span>
+        <span>✦ SMART FARMING ASSISTANT CONNECTS SOIL TELEMETRY TO ESP8266 RELAYS (SIH TRACK)</span>
+        <span>✦ TRUSTMESH EXPLORES ZERO-KNOWLEDGE PROOF OF REALITY: "TRUST THE EVENT, NOT THE IDENTITY"</span>
+        <span>✦ EXCHEQUER ARCHITECTS FX TREASURY RING-FENCING ON SUPABASE EDGE FUNCTIONS</span>
+        <span>✦ FORGE INNOVATION CLUB ADVANCES FOUNDER MENTORSHIP UNDER JAIN LAUNCHPAD</span>
+        <span>✦ FIRST-YEAR UNDERGRADUATE CSE AT JAIN UNIVERSITY • EVIDENCE-LED SYSTEM BUILDER</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN EDITORIAL CONTENT -->
+  <main class="page-container" id="main-content">
+
+    <!-- HERO SECTION / FRONT PAGE -->
+    <section class="hero-section" id="front-page">
+      <div class="hero-grid">
+        
+        <!-- Column 1: Left Editorial Brief -->
+        <div class="hero-col left-brief gsap-reveal-left">
+          <div class="column-meta-tag">SPECIAL FEATURE • VOL. 01</div>
+          <h3 class="brief-title">THE ENGINEERING CONSTRUCT</h3>
+          <p class="brief-lead">
+            In an era of hyper-inflated claims, engineering integrity begins with physical evidence. Exploring the practical nexus of software platforms, AI-enabled decision trees, edge hardware, and zero-knowledge verification.
+          </p>
+          <div class="vintage-divider"><span class="star-sep">✦ ✦ ✦</span></div>
+          <div class="quick-facts-box card-tilt" data-tilt>
+            <div class="fact-row">
+              <span class="fact-label">CURRENT SEAT:</span>
+              <span class="fact-val">1st Year B.Tech CSE</span>
+            </div>
+            <div class="fact-row">
+              <span class="fact-label">ALMA MATER:</span>
+              <span class="fact-val">Jain University, BLR</span>
+            </div>
+            <div class="fact-row">
+              <span class="fact-label">LEADERSHIP:</span>
+              <span class="fact-val">Outreach Leader, FORGE</span>
+            </div>
+            <div class="fact-row">
+              <span class="fact-label">HACKATHONS:</span>
+              <span class="fact-val">IIM Indore '26, SIH</span>
+            </div>
+            <div class="fact-row">
+              <span class="fact-label">PHILOSOPHY:</span>
+              <span class="fact-val">Evidence-Led Engineering</span>
+            </div>
+          </div>
+          <div class="barcode-container">
+            <div class="barcode-lines"></div>
+            <div class="barcode-text">JITESH-CSE-2026-BLR-001</div>
+          </div>
+        </div>
+
+        <!-- Column 2: Centerpiece Headline & Interactive Plate -->
+        <div class="hero-col center-feature">
+          <div class="headline-deck">
+            <span class="kicker">EXTRAORDINARY DISPATCH // INNOVATION &amp; PRACTICE</span>
+            <h2 class="main-headline">
+              BUILDING PRACTICAL SYSTEMS AT THE CROSSROADS OF <span class="italic-serif">Code</span>, <span class="accent-word">Artificial Intelligence</span> &amp; <span class="italic-serif">Privacy</span>
+            </h2>
+            <p class="headline-sub">
+              A First-Year Engineer's Blueprint for Scalable Digital Operations, Decentralized Trust &amp; Tangible Field Telemetry.
+            </p>
+          </div>
+
+          <!-- Interactive Center Photo & Badges Area (Niccolò Miranda signature look) -->
+          <div class="editorial-plate" id="editorialPlate">
+            <!-- Draggable Interactive Stickers / Badges -->
+            <div class="draggable-sticker sticker-1" data-drag title="Grab and drag me!">
+              <div class="sticker-inner badge-red">
+                <span>★ AAROHAN '26</span>
+                <small>IIM INDORE</small>
+              </div>
+            </div>
+            <div class="draggable-sticker sticker-2" data-drag title="Grab and drag me!">
+              <div class="sticker-inner badge-gold">
+                <span>FORGE LEADER</span>
+                <small>JAIN LAUNCHPAD</small>
+              </div>
+            </div>
+            <div class="draggable-sticker sticker-3" data-drag title="Grab and drag me!">
+              <div class="sticker-inner badge-ink">
+                <span>SIH AGRI-TECH</span>
+                <small>AI + IOT</small>
+              </div>
+            </div>
+            <div class="draggable-sticker sticker-4" data-drag title="Grab and drag me!">
+              <div class="sticker-inner badge-stamp">
+                <span>VERIFIED</span>
+                <small>EVIDENCE-LED</small>
+              </div>
+            </div>
+
+            <!-- Authentic Woodcut / Monogram Portrait Card -->
+            <div class="portrait-card card-tilt" data-tilt>
+              <div class="portrait-photo-frame">
+                <!-- Real Editorial Portrait of Jitesh Kumar Reddy -->
+                <div class="portrait-graphic">
+                  <div class="portrait-img-box">
+                    <img src="jitesh-portrait.jpg" alt="Jitesh Kumar Reddy — Builder &amp; Engineer" class="portrait-img" loading="eager">
+                    <div class="portrait-grain-screen" aria-hidden="true"></div>
+                    <div class="portrait-corner-marks" aria-hidden="true">
+                      <span class="corner-mark cm-tl">+</span>
+                      <span class="corner-mark cm-tr">+</span>
+                      <span class="corner-mark cm-bl">+</span>
+                      <span class="corner-mark cm-br">+</span>
+                    </div>
+                    <div class="portrait-reticle-dots" aria-hidden="true">
+                      <span class="p-dot p-dot-1"></span>
+                      <span class="p-dot p-dot-2"></span>
+                      <span class="p-dot p-dot-3"></span>
+                      <span class="p-dot p-dot-4"></span>
+                    </div>
+                  </div>
+                  <div class="portrait-plate-footer">
+                    <div class="portrait-plate-name">JITESH KUMAR REDDY</div>
+                    <div class="portrait-plate-sub">B.TECH CSE • JAIN UNIVERSITY • 2026</div>
+                  </div>
+                </div>
+                
+                <!-- Authentic Distressed Rubber Stamp overlay -->
+                <div class="rubber-stamp authentic-red">
+                  <div class="stamp-border">
+                    <span class="stamp-top">OFFICIAL DISPATCH</span>
+                    <span class="stamp-core">BUILDER</span>
+                    <span class="stamp-bot">FIRST-YEAR INITIATIVE</span>
+                  </div>
+                </div>
+
+                <div class="caption-ribbon">
+                  FIGURE 1.0 — FIELD NOTES ON SYSTEM ARCHITECTURE &amp; OPERATIONS
+                </div>
+              </div>
+            </div>
+
+            <!-- Interactive Hint -->
+            <div class="drag-hint">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"/></svg>
+              <span>DRAG THE STAMP BADGES FREELY ACROSS THE PLATE</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Column 3: Right Column Dispatches & Index -->
+        <div class="hero-col right-dispatch gsap-reveal-right">
+          <div class="column-meta-tag">DISPATCH INDEX // 01–05</div>
+          
+          <div class="dispatch-index-list">
+            
+            <a href="#dispatches" class="index-item" data-project="festos" data-bp-title="FestOS Operations Engine" data-bp-tag="HACKATHON • AAROHAN '26" data-bp-meta="2,836 DELEGATES • 38 CONTINGENTS">
+              <div class="index-head">
+                <span class="index-num">I.</span>
+                <span class="index-name">FESTOS PORTAL</span>
+                <span class="index-tag prototype">PROTOTYPE</span>
+              </div>
+              <p class="index-desc">Coordinating 2,836 delegates, 31 contests &amp; 1,450 beds for Aarohan '26 at IIM Indore.</p>
+            </a>
+
+            <a href="#dispatches" class="index-item" data-project="farming" data-bp-title="Smart Farming Agritech" data-bp-tag="SIH TRACK • AI + IOT" data-bp-meta="ESP8266 • SOIL MOISTURE • DHT22">
+              <div class="index-head">
+                <span class="index-num">II.</span>
+                <span class="index-name">SMART FARMING</span>
+                <span class="index-tag iot">AI + IOT</span>
+              </div>
+              <p class="index-desc">ESP8266 telemetry, soil-moisture automated pumps &amp; offline crop advisory for farmers.</p>
+            </a>
+
+            <a href="#dispatches" class="index-item" data-project="trustmesh" data-bp-title="TRUSTMESH Verification" data-bp-tag="PRIVACY PROTOCOL" data-bp-meta="ZERO PII • FLOOD TEST SCENARIO">
+              <div class="index-head">
+                <span class="index-num">III.</span>
+                <span class="index-name">TRUSTMESH</span>
+                <span class="index-tag privacy">PRIVACY</span>
+              </div>
+              <p class="index-desc">"Trust the event. Not the identity." Zero-knowledge verification of real-world crises.</p>
+            </a>
+
+            <a href="#dispatches" class="index-item" data-project="exchequer" data-bp-title="Exchequer FX Treasury" data-bp-tag="FINTECH &amp; SAAS" data-bp-meta="SUPABASE • HMAC-256 • RBI EEFC">
+              <div class="index-head">
+                <span class="index-num">IV.</span>
+                <span class="index-name">EXCHEQUER</span>
+                <span class="index-tag fintech">FINTECH</span>
+              </div>
+              <p class="index-desc">Automated foreign currency ring-fencing &amp; EEFC compliance for Indian exporters.</p>
+            </a>
+
+            <a href="#dispatches" class="index-item" data-project="offlinepay" data-bp-title="OfflinePay Mesh Protocol" data-bp-tag="DISTRIBUTED RAILS" data-bp-meta="BLE • DYNAMIC QR • NONCE REPLAY">
+              <div class="index-head">
+                <span class="index-num">V.</span>
+                <span class="index-name">OFFLINEPAY</span>
+                <span class="index-tag protocol">PROTOCOL</span>
+              </div>
+              <p class="index-desc">Cryptographic QR &amp; BLE fallback payments with bounded double-spend protection.</p>
+            </a>
+
+          </div>
+
+          <!-- Bottom Action Ticket -->
+          <div class="vintage-ticket card-tilt" data-tilt>
+            <div class="ticket-punch"></div>
+            <div class="ticket-body">
+              <span class="ticket-sub">CAMPUS POST</span>
+              <span class="ticket-main">FORGE OUTREACH LEAD</span>
+              <p class="ticket-desc">Bridging student founders with mentors &amp; capital via Jain Launchpad.</p>
+            </div>
+            <div class="ticket-punch"></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 02: THE EDITORIAL MANIFESTO (01 | PROFILE & EDUCATION) -->
+    <section class="editorial-section" id="editorial">
+      <div class="section-head-banner">
+        <div class="banner-rule"></div>
+        <h2 class="banner-title">01 // THE EDITOR'S NOTE &amp; BIOGRAPHY</h2>
+        <div class="banner-rule"></div>
+      </div>
+
+      <div class="editorial-columns">
+        
+        <!-- Left Column: Biography & Background -->
+        <div class="article-col main-story gsap-reveal-left">
+          <div class="dateline">BENGALURU, KARNATAKA — SPECIAL REPORT</div>
+          <p class="story-lead">
+            <span class="dropcap">I</span> am a first-year Computer Science and Engineering undergraduate at Jain (Deemed-to-be) University in Bengaluru. Rather than accepting software engineering as a sterile academic exercise, my work is driven by a simple imperative: building practical technology that connects software, data, privacy and real-world systems.
+          </p>
+          <p>
+            From the bustling university grounds of Bengaluru to high-stakes hackathon rooms at IIM Indore, I seek out structural friction: How do organizers coordinate three thousand festival delegates across fifteen vendors and forty-eight coordinators without collapsing into logistical chaos? How does a marginal farmer in Karnataka monitor soil moisture and trigger irrigation without being priced out by enterprise industrial telemetry? How can an eyewitness prove a flood occurred without exposing their personal identity and intimate biometric records?
+          </p>
+          <p>
+            These questions cannot be answered with boilerplate templates. They demand an appetite for framing messy problems, decomposing systems into actionable architectures, and turning raw ideas into tangible prototypes, field demonstrations, and working software.
+          </p>
+        </div>
+
+        <!-- Center Column: Philosophical Manifesto & Pull Quote -->
+        <div class="article-col pull-story gsap-reveal">
+
+          <div class="manifesto-card card-tilt" data-tilt>
+            <div class="wax-seal" aria-hidden="true">
+              <div class="seal-inner">
+                <span>JKR</span>
+              </div>
+            </div>
+            <blockquote class="editorial-quote">
+              “Trust the event. Not the identity. Engineering practical systems that bridge software, data, privacy, and tangible human workflows.”
+            </blockquote>
+            <div class="quote-attribution">
+              — JITESH KUMAR REDDY<br>
+              <span class="quote-sub">Undergraduate Engineer &amp; Outreach Leader</span>
+            </div>
+          </div>
+
+          <div class="tenets-mini">
+            <div class="tenet-title">THREE OPERATING PRINCIPLES:</div>
+            <ul class="tenet-list">
+              <li><strong>01. Evidence Over Hype:</strong> Label every project truthfully as Built, Prototype, In Progress, or Concept. No fabricated metrics.</li>
+              <li><strong>02. Real-World Grounding:</strong> Software must interface with real humans, intermittent connectivity, and physical environments.</li>
+              <li><strong>03. Cross-Discipline Synthesis:</strong> Bridging AI decision models, embedded IoT microcontrollers, cryptography, and product design.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Right Column: Academic & Campus Ledger -->
+        <div class="article-col ledger-col gsap-reveal-right">
+          <div class="ledger-box card-tilt" data-tilt>
+            <div class="ledger-header">
+              <span>OFFICIAL REGISTRY</span>
+              <span>RECORD NO. 2026-CSE</span>
+            </div>
+            
+            <div class="ledger-entry">
+              <span class="entry-label">PROGRAM OF STUDY</span>
+              <span class="entry-val">B.Tech — Computer Science &amp; Engineering</span>
+            </div>
+            
+            <div class="ledger-entry">
+              <span class="entry-label">INSTITUTION</span>
+              <span class="entry-val">Jain (Deemed-to-be) University</span>
+              <span class="entry-sub">Bengaluru, Karnataka, India</span>
+            </div>
+
+            <div class="ledger-entry">
+              <span class="entry-label">ACADEMIC STANDING</span>
+              <span class="entry-val">First-Year Undergraduate</span>
+              <span class="entry-sub">Active Engineering Cohort</span>
+            </div>
+
+            <div class="ledger-entry">
+              <span class="entry-label">ENTREPRENEURIAL OFFICE</span>
+              <span class="entry-val">FORGE — Outreach Leader</span>
+              <span class="entry-sub">Jain Launchpad Startup Ecosystem</span>
+            </div>
+
+            <div class="ledger-entry">
+              <span class="entry-label">PRIMARY INCLINATIONS</span>
+              <div class="interest-tags">
+                <span class="tag">AI Applications</span>
+                <span class="tag">Applied Privacy</span>
+                <span class="tag">Agritech IoT</span>
+                <span class="tag">Fintech Rails</span>
+                <span class="tag">System Design</span>
+              </div>
+            </div>
+
+            <div class="certified-stamp">
+              <span>ACADEMIC ENROLLMENT CONFIRMED</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 03: WORKS ARCHIVE / SELECTED DISPATCHES (04 | PROJECTS) -->
+    <section class="dispatches-section" id="dispatches">
+      <div class="section-head-banner">
+        <div class="banner-rule"></div>
+        <h2 class="banner-title">02 // ARCHIVE OF INNOVATIONS &amp; CASE STUDIES</h2>
+        <div class="banner-rule"></div>
+      </div>
+
+      <div class="archive-header-row">
+        <p class="archive-sub">
+          A documented portfolio of engineered prototypes, hackathon entries, and system architecture specifications. Every artifact is truthfully categorized.
+        </p>
+        
+        <!-- Filter Bar styled like library card catalogue tabs -->
+        <div class="catalogue-tabs" role="tablist" aria-label="Project Categories">
+          <button class="cat-tab active" data-filter="all" role="tab" aria-selected="true">
+            <span class="tab-badge">05</span> ALL DISPATCHES
+          </button>
+          <button class="cat-tab" data-filter="hackathon" role="tab" aria-selected="false">
+            <span class="tab-badge">02</span> HACKATHON BUILDS
+          </button>
+          <button class="cat-tab" data-filter="iot" role="tab" aria-selected="false">
+            <span class="tab-badge">01</span> IOT &amp; AI
+          </button>
+          <button class="cat-tab" data-filter="fintech" role="tab" aria-selected="false">
+            <span class="tab-badge">02</span> FINTECH &amp; PRIVACY
+          </button>
+        </div>
+      </div>
+
+      <!-- Case Studies Grid with 3D Tilt Physics -->
+      <div class="projects-editorial-grid" id="projectsGrid">
+
+        <!-- PROJECT 01: FestOS -->
+        <article class="project-broadsheet card-tilt" data-tilt data-category="hackathon" data-id="festos">
+          <div class="sheet-number">DISPATCH NO. 01</div>
+          <div class="sheet-header">
+            <div class="sheet-tags">
+              <span class="badge-tag hackathon">HACKATHON • AAROHAN 2026</span>
+              <span class="badge-tag venue">IIM INDORE</span>
+              <span class="status-stamp status-prototype">PROTOTYPE // SUBMITTED</span>
+            </div>
+            <h3 class="sheet-title">FestOS — Festival Operations Control Portal</h3>
+            <p class="sheet-summary">
+              A unified command and operations portal designed to eliminate administrative fragmentation during mega-scale university cultural festivals.
+            </p>
+          </div>
+
+          <div class="sheet-metrics-row">
+            <div class="metric-block">
+              <span class="metric-num">2,836</span>
+              <span class="metric-lbl">Delegates Coordinated</span>
+            </div>
+            <div class="metric-block">
+              <span class="metric-num">38</span>
+              <span class="metric-lbl">University Contingents</span>
+            </div>
+            <div class="metric-block">
+              <span class="metric-num">31</span>
+              <span class="metric-lbl">Concurrent Competitions</span>
+            </div>
+            <div class="metric-block">
+              <span class="metric-num">1,450</span>
+              <span class="metric-lbl">Beds &amp; Logistics</span>
+            </div>
+          </div>
+
+          <div class="sheet-body">
+            <p class="sheet-text">
+              <strong>The Operational Dilemma:</strong> College festivals fail not from lack of talent, but from logistics disintegration. When 38 outside delegations arrive simultaneously across 9 venues, spreadsheet-based coordination causes catastrophic bottlenecks in accommodation, judge scheduling, and vendor handovers.
+            </p>
+            <p class="sheet-text">
+              <strong>Engineered Solution:</strong> FestOS delivers a single pane of glass for 48 organizers operating across 3 shifts over 4 intense days. Modules include real-time bed inventory tracking, conflict-free venue slotting, and instantaneous vendor token dispatch.
+            </p>
+          </div>
+
+          <div class="sheet-footer">
+            <div class="tech-pills">
+              <span class="pill">Operations Engine</span>
+              <span class="pill">Resource Scheduling</span>
+              <span class="pill">Web Portal</span>
+              <span class="pill">Shift Telemetry</span>
+            </div>
+            <button class="inspect-btn" onclick="openCaseStudy('festos')" title="Read full architectural case study">
+              INSPECT DISPATCH <span class="arrow">→</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- PROJECT 02: Smart Farming Assistant with Interactive Living Crop Field Simulation Canvas! -->
+        <article class="project-broadsheet card-tilt" data-tilt data-category="iot" data-id="farming">
+          <div class="sheet-number">DISPATCH NO. 02</div>
+          <div class="sheet-header">
+            <div class="sheet-tags">
+              <span class="badge-tag hackathon">SMART INDIA HACKATHON</span>
+              <span class="badge-tag venue">AGRITECH TRACK</span>
+              <span class="status-stamp status-hardware">AI + HARDWARE CONCEPT</span>
+            </div>
+            <h3 class="sheet-title">Smart Farming Assistant — AI + IoT Agritech</h3>
+            <p class="sheet-summary">
+              A field-deployable agronomy assistant bridging low-cost edge sensors with AI advisory models and automated irrigation relays for marginal farmers.
+            </p>
+          </div>
+
+          <!-- Interactive Living Field Simulation Canvas (User's field-canvas.js engine) -->
+          <div class="living-field-interactive-card">
+            <div class="field-canvas-top-bar">
+              <span class="canvas-badge">● LIVE INTERACTIVE SOIL &amp; CROP SIMULATION</span>
+              <div class="field-actions">
+                <button class="field-action-btn water-pulse-btn" onclick="triggerFieldWater()" title="Trigger 5V Relay Pump Spray">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+                  TRIGGER 5V RELAY PUMP
+                </button>
+                <button class="field-action-btn rain-storm-btn" onclick="triggerFieldRain()" title="Trigger Simulated Rainfall">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="16" y1="13" x2="16" y2="21"/><line x1="8" y1="13" x2="8" y2="21"/><line x1="12" y1="15" x2="12" y2="23"/><path d="M20 16.58A5 5 0 0 0 18 7h-1.26A8 8 0 1 0 4 15.25"/></svg>
+                  MONSOON RAIN
+                </button>
+              </div>
+            </div>
+            <div class="canvas-viewport">
+              <canvas id="livingFieldCanvas"></canvas>
+              <div class="canvas-hint-overlay">
+                <span>✦ MOVE CURSOR TO SWAY CROPS • CLICK BUTTONS FOR IRRIGATION</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="sheet-metrics-row">
+            <div class="metric-block">
+              <span class="metric-num">ESP8266</span>
+              <span class="metric-lbl">Microcontroller Node</span>
+            </div>
+            <div class="metric-block">
+              <span class="metric-num">DHT22</span>
+              <span class="metric-lbl">Temp/Humidity Sensing</span>
+            </div>
+            <div class="metric-block">
+              <span class="metric-num">5V RELAY</span>
+              <span class="metric-lbl">Automated Pump Trigger</span>
+            </div>
+            <div class="metric-block">
+              <span class="metric-num">2G / USSD</span>
+              <span class="metric-lbl">Low-Bandwidth Channels</span>
+            </div>
+          </div>
+
+          <div class="sheet-body">
+            <p class="sheet-text">
+              <strong>The Agronomic Challenge:</strong> Smallholder farmers in India frequently suffer severe crop loss due to delayed disease identification and erratic water availability. Most commercial solutions require expensive broadband connectivity and high-end smartphones that do not function in remote fields.
+            </p>
+            <p class="sheet-text">
+              <strong>Engineered Solution:</strong> A ruggedized edge probe measuring volumetric soil moisture and microclimate variables. Data feeds an AI disease diagnosis tree while automatically switching 5V irrigation relays when soil moisture breaches critical thresholds.
+            </p>
+          </div>
+
+          <div class="sheet-footer">
+            <div class="tech-pills">
+              <span class="pill">ESP8266</span>
+              <span class="pill">Soil-Moisture Probes</span>
+              <span class="pill">Relay Pump Control</span>
+              <span class="pill">Crop AI Advisory</span>
+            </div>
+            <button class="inspect-btn" onclick="openCaseStudy('farming')" title="Read full architectural case study">
+              INSPECT DISPATCH <span class="arrow">→</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- PROJECT 03: TRUSTMESH -->
+        <article class="project-broadsheet card-tilt" data-tilt data-category="fintech" data-id="trustmesh">
+          <div class="sheet-number">DISPATCH NO. 03</div>
+          <div class="sheet-header">
+            <div class="sheet-tags">
+              <span class="badge-tag privacy-tag">PRIVACY ARCHITECTURE</span>
+              <span class="badge-tag venue">CRYPTOGRAPHIC SPEC</span>
+              <span class="status-stamp status-prototype">PROTOTYPE SPEC</span>
+            </div>
+            <h3 class="sheet-title">TRUSTMESH — Proof-of-Reality Protocol</h3>
+            <p class="sheet-summary">
+              “Trust the event. Not the identity.” A decentralized verification framework for attesting to real-world occurrences without compromising personal identity.
+            </p>
+          </div>
+
+          <div class="sheet-metrics-row">
+            <div class="metric-block">
+              <span class="metric-num">ZERO PII</span>
+              <span class="metric-lbl">Identity Exposure</span>
+            </div>
+            <div class="metric-block">
+              <span class="metric-num">REACT NAT</span>
+              <span class="metric-lbl">Expo Mobile Node</span>
+            </div>
+            <div class="metric-block">
+              <span class="metric-num">FLOOD-DIS</span>
+              <span class="metric-lbl">Disaster Scenario Tested</span>
+            </div>
+            <div class="metric-block">
+              <span class="metric-num">TS ADMIN</span>
+              <span class="metric-lbl">TypeScript Web Portal</span>
+            </div>
+          </div>
+
+          <div class="sheet-body">
+            <p class="sheet-text">
+              <strong>The Privacy Conundrum:</strong> In disaster relief or emergency reporting (e.g. municipal floods, accidents, humanitarian deliveries), verifying that an incident occurred currently requires citizens to surrender identity numbers, phone records, and location histories—deterring truthful reporting and creating massive surveillance risks.
+            </p>
+            <p class="sheet-text">
+              <strong>Engineered Solution:</strong> TRUSTMESH decouples event attestation from biometric identity. Mobile nodes generate cryptographically signed environmental proofs verified by a consensus of nearby peer devices and municipal admin consoles, upholding absolute witness privacy.
+            </p>
+          </div>
+
+          <div class="sheet-footer">
+            <div class="tech-pills">
+              <span class="pill">React Native</span>
+              <span class="pill">Expo</span>
+              <span class="pill">TypeScript</span>
+              <span class="pill">Zero-Knowledge Attestation</span>
+            </div>
+            <button class="inspect-btn" onclick="openCaseStudy('trustmesh')" title="Read full architectural case study">
+              INSPECT DISPATCH <span class="arrow">→</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- PROJECT 04: Exchequer / ApexTreasury -->
+        <article class="project-broadsheet card-tilt" data-tilt data-category="fintech" data-id="exchequer">
+          <div class="sheet-number">DISPATCH NO. 04</div>
+          <div class="sheet-header">
+            <div class="sheet-tags">
+              <span class="badge-tag fintech-tag">FINTECH &amp; SAAS</span>
+              <span class="badge-tag venue">CROSS-BORDER RAILS</span>
+              <span class="status-stamp status-concept">FINANCIAL ENGINE SPEC</span>
+            </div>
+            <h3 class="sheet-title">Exchequer / ApexTreasury</h3>
+            <p class="sheet-summary">
+              Automated multi-currency treasury infrastructure for Indian technology exporters receiving foreign revenue, featuring EEFC automated ring-fencing.
+            </p>
+          </div>
+
+          <div class="sheet-metrics-row">
+            <div class="metric-block">
+              <span class="metric-num">SUPABASE</span>
+              <span class="metric-lbl">Edge Functions</span>
+            </div>
+            <div class="metric-block">
+              <span class="metric-num">HMAC-256</span>
+              <span class="metric-lbl">Webhook Authentication</span>
+            </div>
+            <div class="metric-block">
+              <span class="metric-num">POSTGRES</span>
+              <span class="metric-lbl">Row-Level Security</span>
+            </div>
+            <div class="metric-block">
+              <span class="metric-num">RBI-EEFC</span>
+              <span class="metric-lbl">Regulatory Compliance</span>
+            </div>
+          </div>
+
+          <div class="sheet-body">
+            <p class="sheet-text">
+              <strong>The Financial Drain:</strong> Indian SaaS and software exporters lose 2% to 4.5% on forced auto-conversions when receiving USD/EUR wires. Traditional banks fail to automate transfers into Exchange Earners’ Foreign Currency (EEFC) accounts, resulting in steep currency conversion slippage.
+            </p>
+            <p class="sheet-text">
+              <strong>Engineered Solution:</strong> An event-driven treasury layer utilizing Supabase Edge Functions, HMAC-SHA256 authenticated gateway webhooks, and granular PostgreSQL RLS. Inflows are dynamically ring-fenced to fund foreign-currency SaaS expenses before INR conversion.
+            </p>
+          </div>
+
+          <div class="sheet-footer">
+            <div class="tech-pills">
+              <span class="pill">Supabase</span>
+              <span class="pill">PostgreSQL RLS</span>
+              <span class="pill">HMAC-SHA256</span>
+              <span class="pill">EEFC Treasury</span>
+            </div>
+            <button class="inspect-btn" onclick="openCaseStudy('exchequer')" title="Read full architectural case study">
+              INSPECT DISPATCH <span class="arrow">→</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- PROJECT 05: OfflinePay -->
+        <article class="project-broadsheet card-tilt" data-tilt data-category="fintech" data-id="offlinepay">
+          <div class="sheet-number">DISPATCH NO. 05</div>
+          <div class="sheet-header">
+            <div class="sheet-tags">
+              <span class="badge-tag protocol-tag">DISTRIBUTED PROTOCOL</span>
+              <span class="badge-tag venue">NETWORK RESILIENCE</span>
+              <span class="status-stamp status-concept">PROTOCOL EXPLORATION</span>
+            </div>
+            <h3 class="sheet-title">OfflinePay — Payment-Continuity Architecture</h3>
+            <p class="sheet-summary">
+              A resilient cryptographic fallback payment protocol enabling peer-to-peer commerce when cellular infrastructure collapses or in remote connectivity deserts.
+            </p>
+          </div>
+
+          <div class="sheet-metrics-row">
+            <div class="metric-block">
+              <span class="metric-num">BLE / QR</span>
+              <span class="metric-lbl">Physical Mesh Channels</span>
+            </div>
+            <div class="metric-block">
+              <span class="metric-num">REPLAY</span>
+              <span class="metric-lbl">Cryptographic Defense</span>
+            </div>
+            <div class="metric-block">
+              <span class="metric-num">BOUNDED</span>
+              <span class="metric-lbl">Double-Spend Caps</span>
+            </div>
+            <div class="metric-block">
+              <span class="metric-num">SETTLE</span>
+              <span class="metric-lbl">Post-Online Reconciliation</span>
+            </div>
+          </div>
+
+          <div class="sheet-body">
+            <p class="sheet-text">
+              <strong>The Connectivity Failure:</strong> Digital payment rails in India process billions of transactions, but fail instantly during network outages, natural calamities, or in high-density festival grounds where base stations become overwhelmed.
+            </p>
+            <p class="sheet-text">
+              <strong>Engineered Solution:</strong> OfflinePay provisions bounded offline credit balances using asymmetric cryptographic signatures exchanged via dynamic QR codes and Bluetooth Low Energy. Replay protection buffers and eventual ledger reconciliation ensure zero transaction loss upon network reconnection.
+            </p>
+          </div>
+
+          <div class="sheet-footer">
+            <div class="tech-pills">
+              <span class="pill">Asymmetric Cryptography</span>
+              <span class="pill">Dynamic QR</span>
+              <span class="pill">BLE Transport</span>
+              <span class="pill">Ledger Reconciliation</span>
+            </div>
+            <button class="inspect-btn" onclick="openCaseStudy('offlinepay')" title="Read full architectural case study">
+              INSPECT DISPATCH <span class="arrow">→</span>
+            </button>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- SECTION 04: THE CLASSIFIEDS & PATENT REGISTRY (05 | TECHNICAL SKILLS) -->
+    <section class="classifieds-section" id="classifieds">
+      <div class="section-head-banner">
+        <div class="banner-rule"></div>
+        <h2 class="banner-title">03 // THE CLASSIFIEDS &amp; PATENT REGISTRY OF CAPABILITIES</h2>
+        <div class="banner-rule"></div>
+      </div>
+
+      <div class="classifieds-intro">
+        <p class="classifieds-disclaimer">
+          <strong>NOTICE TO THE EXAMINER:</strong> In accordance with strict engineering honesty, technologies are indexed with exact levels of exposure. Only disciplines independently built and demonstrated are declared as active capabilities.
+        </p>
+      </div>
+
+      <div class="classifieds-newspaper-grid">
+        
+        <!-- Category 01 -->
+        <div class="classified-box card-tilt" data-tilt>
+          <div class="classified-header">
+            <span class="cat-col-num">SEC. 01</span>
+            <span class="cat-col-title">CORE PROGRAMMING</span>
+          </div>
+          <div class="classified-content">
+            <div class="ad-item">
+              <h4 class="ad-name">PYTHON</h4>
+              <span class="ad-badge primary">ACTIVE PRACTICE</span>
+              <p class="ad-desc">Academic programming practice, data structures, algorithmic decomposition, script automation, and analytical pipelines.</p>
+            </div>
+            <div class="ad-item">
+              <h4 class="ad-name">SYSTEM DESIGN FUNDAMENTALS</h4>
+              <span class="ad-badge">THEORY &amp; PRACTICE</span>
+              <p class="ad-desc">Object-oriented structuring, modular component design, separation of concerns, and defensive error handling.</p>
+            </div>
+            <div class="ad-item">
+              <h4 class="ad-name">C / C++ &amp; CORE CS</h4>
+              <span class="ad-badge exposure">FOUNDATION EXPOSURE</span>
+              <p class="ad-desc">First-year coursework foundations in memory layout, procedural syntax, and computation theory.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category 02 -->
+        <div class="classified-box card-tilt" data-tilt>
+          <div class="classified-header">
+            <span class="cat-col-num">SEC. 02</span>
+            <span class="cat-col-title">WEB &amp; PLATFORMS</span>
+          </div>
+          <div class="classified-content">
+            <div class="ad-item">
+              <h4 class="ad-name">WEB ARCHITECTURE</h4>
+              <span class="ad-badge primary">APPLIED IN FESTOS</span>
+              <p class="ad-desc">Designing multi-tenant event portals, role-based organizer dashboards, and structured REST API communication.</p>
+            </div>
+            <div class="ad-item">
+              <h4 class="ad-name">JAVASCRIPT &amp; REACT ECOSYSTEM</h4>
+              <span class="ad-badge">COMPONENT ARCHITECTURE</span>
+              <p class="ad-desc">Interactive frontend states, TypeScript contract definitions, React Native / Expo exploration in TRUSTMESH.</p>
+            </div>
+            <div class="ad-item">
+              <h4 class="ad-name">RESPONSIVE &amp; EDITORIAL UI</h4>
+              <span class="ad-badge">CRAFT &amp; INTERACTION</span>
+              <p class="ad-desc">Bespoke typographic hierarchies, accessible semantic DOM structures, kinetic animations, and micro-interactions.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category 03 -->
+        <div class="classified-box card-tilt" data-tilt>
+          <div class="classified-header">
+            <span class="cat-col-num">SEC. 03</span>
+            <span class="cat-col-title">AI &amp; DATA SYSTEMS</span>
+          </div>
+          <div class="classified-content">
+            <div class="ad-item">
+              <h4 class="ad-name">AI DECISION SUPPORT</h4>
+              <span class="ad-badge primary">SIH AGRI-TECH</span>
+              <p class="ad-desc">Designing algorithmic recommendation trees for crop disease diagnostics, soil nutrients, and irrigation scheduling.</p>
+            </div>
+            <div class="ad-item">
+              <h4 class="ad-name">DATA PIPELINES &amp; MODEL INPUTS</h4>
+              <span class="ad-badge">DATA WORKFLOWS</span>
+              <p class="ad-desc">Preprocessing environmental sensor streams, sensor calibration curves, and feature normalization for inference.</p>
+            </div>
+            <div class="ad-item">
+              <h4 class="ad-name">EVALUATION &amp; BENCHMARKING</h4>
+              <span class="ad-badge exposure">CONCEPTUAL</span>
+              <p class="ad-desc">Assessing recommendation confidence scores and false-positive risk mitigation for mission-critical farm interventions.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category 04 -->
+        <div class="classified-box card-tilt" data-tilt>
+          <div class="classified-header">
+            <span class="cat-col-num">SEC. 04</span>
+            <span class="cat-col-title">EMBEDDED &amp; IOT</span>
+          </div>
+          <div class="classified-content">
+            <div class="ad-item">
+              <h4 class="ad-name">ESP8266 MICROCONTROLLER</h4>
+              <span class="ad-badge primary">HARDWARE DEPLOYMENT</span>
+              <p class="ad-desc">WiFi microcontroller programming, GPIO pin management, serial telemetry, and edge-to-cloud MQTT/HTTP pushes.</p>
+            </div>
+            <div class="ad-item">
+              <h4 class="ad-name">ANALOG &amp; DIGITAL SENSORS</h4>
+              <span class="ad-badge">CIRCUIT LEVEL</span>
+              <p class="ad-desc">Capacitive soil-moisture probes, DHT22 temperature and relative humidity sensors, signal noise debounce.</p>
+            </div>
+            <div class="ad-item">
+              <h4 class="ad-name">ACTUATION &amp; RELAY CONTROL</h4>
+              <span class="ad-badge">HARDWARE SAFETY</span>
+              <p class="ad-desc">Optocoupled 5V relay triggering for submersible water pumps and physical power regulation circuits.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category 05 -->
+        <div class="classified-box card-tilt" data-tilt>
+          <div class="classified-header">
+            <span class="cat-col-num">SEC. 05</span>
+            <span class="cat-col-title">SECURITY &amp; PRIVACY</span>
+          </div>
+          <div class="classified-content">
+            <div class="ad-item">
+              <h4 class="ad-name">HMAC-SHA256 SIGNATURES</h4>
+              <span class="ad-badge primary">EXCHEQUER ENGINE</span>
+              <p class="ad-desc">Cryptographic webhook authentication, signature validation, and payload integrity verification for financial gateways.</p>
+            </div>
+            <div class="ad-item">
+              <h4 class="ad-name">REPLAY PROTECTION</h4>
+              <span class="ad-badge">DISTRIBUTED SYSTEMS</span>
+              <p class="ad-desc">Timestamp sliding windows, nonce deduplication tables, and idempotency guarantees for offline transactions.</p>
+            </div>
+            <div class="ad-item">
+              <h4 class="ad-name">PRIVACY-PRESERVING PROOFS</h4>
+              <span class="ad-badge exposure">RESEARCH SPEC</span>
+              <p class="ad-desc">Zero-knowledge conceptual architectures to verify physical events without disclosing participant biometric identity.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category 06 -->
+        <div class="classified-box card-tilt" data-tilt>
+          <div class="classified-header">
+            <span class="cat-col-num">SEC. 06</span>
+            <span class="cat-col-title">BACKEND &amp; CLOUD RAILS</span>
+          </div>
+          <div class="classified-content">
+            <div class="ad-item">
+              <h4 class="ad-name">SUPABASE &amp; POSTGRESQL</h4>
+              <span class="ad-badge primary">EDGE ARCHITECTURE</span>
+              <p class="ad-desc">Row-Level Security (RLS) policies, schema migrations, and serverless Edge Functions for event execution.</p>
+            </div>
+            <div class="ad-item">
+              <h4 class="ad-name">WEBHOOKS &amp; EVENT SYSTEMS</h4>
+              <span class="ad-badge">INTEGRATION</span>
+              <p class="ad-desc">Asynchronous event ingestion, webhook retry mechanisms, idempotency keys, and payment state machines.</p>
+            </div>
+            <div class="ad-item">
+              <h4 class="ad-name">PRODUCT &amp; PITCH METHOD</h4>
+              <span class="ad-badge">COMMUNICATION</span>
+              <p class="ad-desc">Problem-framing, hackathon technical decks, wireframe workflows, and executive defense presentations.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 05: THE FORGE DISPATCH & LEADERSHIP (03 | LEADERSHIP) -->
+    <section class="forge-section" id="forge">
+      <div class="section-head-banner">
+        <div class="banner-rule"></div>
+        <h2 class="banner-title">04 // THE FORGE DISPATCH &amp; CAMPUS LEADERSHIP</h2>
+        <div class="banner-rule"></div>
+      </div>
+
+      <div class="forge-broadsheet card-tilt" data-tilt>
+        <div class="forge-header-block">
+          <div class="forge-flag">ENTREPRENEURSHIP &amp; INNOVATION GAZETTE</div>
+          <h3 class="forge-title">FORGE — THE STUDENT LAUNCH ENGINE AT JAIN UNIVERSITY</h3>
+          <p class="forge-intro">
+            Operating as an integral pipeline under the prestigious <strong>Jain Launchpad</strong> ecosystem, FORGE identifies, equips, and catapults student builders from napkin sketches into institutional funding and industrial mentorship.
+          </p>
+        </div>
+
+        <!-- Executive Roster Table -->
+        <div class="roster-card">
+          <div class="roster-title">OFFICIAL EXECUTIVE COMMITTEE // LEADERSHIP SQUAD</div>
+          <div class="roster-grid">
+            <div class="roster-member">
+              <span class="roster-role">PRESIDENT</span>
+              <span class="roster-name">Hriday</span>
+              <span class="roster-desc">Club direction, institutional strategy &amp; venture alignment</span>
+            </div>
+            <div class="roster-member">
+              <span class="roster-role">VICE PRESIDENT</span>
+              <span class="roster-name">Vard</span>
+              <span class="roster-desc">Internal operations, program architecture &amp; team execution</span>
+            </div>
+            <div class="roster-member highlight">
+              <span class="roster-role">OUTREACH LEADER</span>
+              <span class="roster-name">Jitesh Kumar Reddy</span>
+              <span class="roster-desc">Ecosystem outreach, founder engagement, hackathon mobilisation &amp; corporate liaisons</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 Pillars of Leadership -->
+        <div class="forge-pillars-grid">
+          
+          <div class="pillar-card card-tilt" data-tilt>
+            <div class="pillar-num">01</div>
+            <h4 class="pillar-head">FOUNDER &amp; MENTOR ENGAGEMENT</h4>
+            <p class="pillar-text">
+              Active liaison connecting student tech innovators to seasoned operators, angel investors, and domain experts within the Bengaluru startup corridor.
+            </p>
+          </div>
+
+          <div class="pillar-card card-tilt" data-tilt>
+            <div class="pillar-num">02</div>
+            <h4 class="pillar-head">HACKATHON &amp; VENTURE MOBILISATION</h4>
+            <p class="pillar-text">
+              Curating teams, conducting problem-statement teardowns, and accelerating students into competitive arenas like Smart India Hackathon and IIM Indore.
+            </p>
+          </div>
+
+          <div class="pillar-card card-tilt" data-tilt>
+            <div class="pillar-num">03</div>
+            <h4 class="pillar-head">INDUSTRY COLLABORATIONS</h4>
+            <p class="pillar-text">
+              Fostering corporate partnerships and bringing cutting-edge developer toolkits, APIs, and grant programs directly onto the Jain University campus.
+            </p>
+          </div>
+
+          <div class="pillar-card card-tilt" data-tilt>
+            <div class="pillar-num">04</div>
+            <h4 class="pillar-head">EVIDENCE-LED CULTURE</h4>
+            <p class="pillar-text">
+              Shifting student engineering culture away from superficial presentations toward working prototypes, verified users, and defensible architectures.
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Quote from the Outreach Desk -->
+        <div class="forge-footer-quote">
+          <span class="quote-mark">“</span>
+          <p>
+            An innovation club is only as formidable as the founders it helps launch. At FORGE, our mission is to ensure no student engineer with a viable solution suffers for lack of mentorship, infrastructure, or belief.
+          </p>
+          <span class="speaker-tag">— JITESH KUMAR REDDY, OUTREACH LEADER</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 06: CORE PROFESSIONAL STRENGTHS (07 & 08 | STRENGTHS & INTERESTS) -->
+    <section class="strengths-section">
+      <div class="section-head-banner">
+        <div class="banner-rule"></div>
+        <h2 class="banner-title">05 // SIX ENDURING ATTRIBUTES &amp; DOMAIN INTERESTS</h2>
+        <div class="banner-rule"></div>
+      </div>
+
+      <div class="strengths-grid">
+        
+        <div class="strength-card card-tilt" data-tilt>
+          <div class="strength-seal">I</div>
+          <h4 class="strength-title">Product-Oriented Framing</h4>
+          <p class="strength-desc">
+            Deconstructing nebulous, messy problems into crisp feature roadmaps, user stories, and defensible technical trade-offs.
+          </p>
+        </div>
+
+        <div class="strength-card card-tilt" data-tilt>
+          <div class="strength-seal">II</div>
+          <h4 class="strength-title">Real-World Utility</h4>
+          <p class="strength-desc">
+            Zero appetite for toy applications; focused on systems that survive hardware failures, 2G bandwidth, and real human error.
+          </p>
+        </div>
+
+        <div class="strength-card card-tilt" data-tilt>
+          <div class="strength-seal">III</div>
+          <h4 class="strength-title">Collaborative Execution</h4>
+          <p class="strength-desc">
+            Thriving in high-pressure hackathons and cross-functional teams, orchestrating frontend, backend, and hardware deliverables.
+          </p>
+        </div>
+
+        <div class="strength-card card-tilt" data-tilt>
+          <div class="strength-seal">IV</div>
+          <h4 class="strength-title">Technical Communication</h4>
+          <p class="strength-desc">
+            Translating complex distributed protocols or hardware circuits into persuasive executive pitches and lucid architectural documentation.
+          </p>
+        </div>
+
+        <div class="strength-card card-tilt" data-tilt>
+          <div class="strength-seal">V</div>
+          <h4 class="strength-title">Community Mobilisation</h4>
+          <p class="strength-desc">
+            Demonstrated capacity to rally hundreds of university peers, organize institutional events, and build enduring founder ecosystems.
+          </p>
+        </div>
+
+        <div class="strength-card card-tilt" data-tilt>
+          <div class="strength-seal">VI</div>
+          <h4 class="strength-title">Continuous Curiosity</h4>
+          <p class="strength-desc">
+            Relentlessly surveying emerging paradigms across applied zero-knowledge cryptography, embedded firmware, AI inference, and fintech rails.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 07: THE TELEGRAPH DESK / CONTACT (09 & 10 | CONTACT & ENVELOPE) -->
+    <section class="telegraph-section" id="telegraph">
+      <div class="section-head-banner">
+        <div class="banner-rule"></div>
+        <h2 class="banner-title">06 // THE TELEGRAPH &amp; TRANSMISSION DESK</h2>
+        <div class="banner-rule"></div>
+      </div>
+
+      <div class="telegraph-grid">
+        
+        <!-- Left: Vintage Telegram Form -->
+        <div class="telegram-form-card card-tilt gsap-reveal-left" data-tilt>
+          <div class="telegram-top-strip">
+            <span class="tg-badge">INDIAN POST &amp; TELEGRAPH FORM</span>
+            <span class="tg-urgent">PRIORITY DISPATCH</span>
+          </div>
+
+          <div class="tg-notice">
+            TRANSMIT INQUIRIES, HACKATHON INVITATIONS, OR COLLABORATIVE PROPOSALS DIRECTLY TO THE BUILDER’S DESK.
+          </div>
+
+          <form id="telegramForm" class="tg-form" onsubmit="handleTelegramSubmit(event)">
+            
+            <div class="form-row two-col">
+              <div class="field-wrap">
+                <label for="senderName" class="tg-label">TRANSMITTER NAME (OR ORGANISATION):</label>
+                <input type="text" id="senderName" class="tg-input" placeholder="e.g. Dr. A. Sharma / Founder" required>
+              </div>
+              <div class="field-wrap">
+                <label for="senderEmail" class="tg-label">RETURN TELEGRAPH ADDRESS (EMAIL):</label>
+                <input type="email" id="senderEmail" class="tg-input" placeholder="e.g. sender@company.com" required>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <label for="queryNature" class="tg-label">NATURE OF TRANSMISSION:</label>
+              <select id="queryNature" class="tg-select">
+                <option value="hackathon">Hackathon Collaboration / Team Alliance</option>
+                <option value="project">System Engineering / Technical Project</option>
+                <option value="forge">FORGE &amp; Jain Launchpad Outreach</option>
+                <option value="internship">Engineering Internship / Fellowship Opportunity</option>
+                <option value="coffee">Technical Discussion / Coffee in Bengaluru</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <label for="telegramBody" class="tg-label">MESSAGE DISPATCH (STOP WITH EVIDENCE):</label>
+              <textarea id="telegramBody" class="tg-textarea" rows="4" placeholder="Type your message here. Be specific about scope, timeline, and problem statement..." required></textarea>
+            </div>
+
+            <div class="form-bottom-row">
+              <button type="submit" class="tg-submit-btn" id="tgSubmitBtn">
+                <span class="btn-stamp-text">STAMP &amp; TRANSMIT TELEGRAM</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              </button>
+              <span class="tg-status-msg" id="tgStatus">READY FOR TRANSMISSION</span>
+            </div>
+          </form>
+
+        </div>
+
+        <!-- Right: Official Postal Coordinates & Direct Mail -->
+        <div class="coordinates-card card-tilt gsap-reveal-right" data-tilt>
+          <div class="coordinates-head">
+            <span class="coord-tag">OFFICIAL STATION</span>
+            <h3 class="coord-title">DIRECT REPOSITORIES &amp; CHANNELS</h3>
+          </div>
+
+          <div class="channel-list">
+            
+            <div class="channel-item">
+              <div class="channel-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <div class="channel-details">
+                <span class="channel-label">ELECTRONIC MAIL</span>
+                <span class="channel-value" id="emailVal">jiteshkumarreddy.work@gmail.com</span>
+              </div>
+              <button class="copy-channel-btn" onclick="copyToClipboard('jiteshkumarreddy.work@gmail.com', 'Email')" title="Copy email address">
+                COPY
+              </button>
+            </div>
+
+            <div class="channel-item">
+              <div class="channel-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              </div>
+              <div class="channel-details">
+                <span class="channel-label">LINKEDIN NETWORK</span>
+                <span class="channel-value">linkedin.com/in/jiteshkumarreddy</span>
+              </div>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="link-channel-btn">
+                VISIT ↗
+              </a>
+            </div>
+
+            <div class="channel-item">
+              <div class="channel-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              </div>
+              <div class="channel-details">
+                <span class="channel-label">GITHUB REPOSITORIES</span>
+                <span class="channel-value">github.com/jiteshkumarreddy</span>
+              </div>
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="link-channel-btn">
+                VISIT ↗
+              </a>
+            </div>
+
+            <div class="channel-item">
+              <div class="channel-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div class="channel-details">
+                <span class="channel-label">PHYSICAL LATITUDE / DECK</span>
+                <span class="channel-value">Bengaluru, Karnataka, India (560069)</span>
+              </div>
+              <span class="status-indicator-mini">ACTIVE SEAT</span>
+            </div>
+
+          </div>
+
+          <div class="postal-postscript">
+            <div class="postscript-title">DECLARATION OF INTENT:</div>
+            <p>
+              Available for technical hackathons, venture prototyping, research engineering collaborations, and student ecosystem leadership across India.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- GRAND NEWSPAPER FOOTER -->
+  <footer class="gazette-footer" role="contentinfo">
+    <div class="footer-top-rule"></div>
+    <div class="footer-grid">
+      
+      <div class="footer-col col-identity">
+        <div class="footer-logo">THE JITESH CHRONICLE</div>
+        <p class="footer-desc">
+          An authentic, evidence-based portfolio archive engineered for Jitesh Kumar Reddy. Crafted in tribute to bespoke tactile editorial aesthetics and modern web performance.
+        </p>
+        <div class="cmyk-registration" aria-hidden="true">
+          <span class="cmyk-dot cyan" title="Cyan"></span>
+          <span class="cmyk-dot magenta" title="Magenta"></span>
+          <span class="cmyk-dot yellow" title="Yellow"></span>
+          <span class="cmyk-dot black" title="Key/Black"></span>
+          <span class="cmyk-text">CMYK PASS: CERTIFIED</span>
+        </div>
+      </div>
+
+      <div class="footer-col col-sections">
+        <h5 class="footer-head">GAZETTE SECTIONS</h5>
+        <ul class="footer-nav">
+          <li><a href="#front-page">01. Front Page &amp; Plate</a></li>
+          <li><a href="#editorial">02. The Editor's Note</a></li>
+          <li><a href="#dispatches">03. Archive of Innovations</a></li>
+          <li><a href="#classifieds">04. The Classifieds Registry</a></li>
+          <li><a href="#forge">05. The FORGE Dispatch</a></li>
+          <li><a href="#telegraph">06. The Telegraph Desk</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col col-colophon">
+        <h5 class="footer-head">COLOPHON &amp; CRAFT</h5>
+        <div class="colophon-item">
+          <strong>TYPEFACES:</strong> Playfair Display, Instrument Serif, Space Grotesk, JetBrains Mono
+        </div>
+        <div class="colophon-item">
+          <strong>SOUND ENGINE:</strong> Procedural Web Audio API Synth (Zero External MP3s)
+        </div>
+        <div class="colophon-item">
+          <strong>KINETIC ENGINE:</strong> GSAP 3 &amp; Dynamic Spring Damping
+        </div>
+        <div class="colophon-item">
+          <strong>HOMAGE:</strong> Inspired by Niccolò Miranda’s bespoke craftsmanship
+        </div>
+      </div>
+
+      <div class="footer-col col-imprimatur">
+        <div class="imprimatur-box card-tilt" data-tilt>
+          <div class="imp-title">IMPRIMATUR &amp; PROOF</div>
+          <div class="imp-stamp">PASSED FOR PRESS</div>
+          <p class="imp-text">
+            All details sourced directly from the official profile of Jitesh Kumar Reddy, Jain University.
+          </p>
+          <button class="back-to-top-btn" onclick="scrollToTop()" title="Return to masthead">
+            ↑ TOP OF GAZETTE
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom-bar">
+      <span>© 2026 JITESH KUMAR REDDY • ALL RIGHTS RESERVED • JAIN (DEEMED-TO-BE) UNIVERSITY</span>
+      <span>CIRCULATING GLOBALLY FROM BENGALURU, INDIA</span>
+    </div>
+  </footer>
+
+  <!-- CASE STUDY EDITORIAL MODAL -->
+  <div class="modal-backdrop" id="caseStudyModal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-paper">
+      
+      <button class="modal-close-btn" onclick="closeCaseStudy()" aria-label="Close Case Study">
+        ✕ CLOSE DISPATCH
+      </button>
+
+      <div class="modal-inner" id="modalContent">
+        <!-- Injected via JavaScript based on project ID -->
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DOSSIER / CV PRINT MODAL -->
+  <div class="modal-backdrop" id="dossierModal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-paper dossier-paper">
+      
+      <div class="modal-top-bar">
+        <button class="print-trigger-btn" onclick="window.print()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          PRINT OFFICIAL DOSSIER [PDF]
+        </button>
+        <button class="modal-close-btn" onclick="closeDossierModal()" aria-label="Close Dossier">
+          ✕ CLOSE
+        </button>
+      </div>
+
+      <div class="dossier-document" id="dossierDoc">
+        <div class="dossier-header">
+          <div class="dossier-header-flex">
+            <div class="dossier-photo-stamp">
+              <img src="jitesh-portrait.jpg" alt="Jitesh Kumar Reddy" class="dossier-thumb">
+              <div class="dossier-thumb-stamp">VERIFIED</div>
+            </div>
+            <div class="dossier-header-text">
+              <div class="dossier-stamp-seal">OFFICIAL PROFILE ARCHIVE</div>
+              <h2 class="dossier-name">JITESH KUMAR REDDY</h2>
+              <div class="dossier-headline">B.Tech Computer Science &amp; Engineering | Jain (Deemed-to-be) University, Bengaluru</div>
+              <div class="dossier-contact-line">
+                Bengaluru, Karnataka, India • jiteshkumarreddy.work@gmail.com • FORGE Outreach Leader
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dossier-rule"></div>
+
+        <div class="dossier-section">
+          <h3 class="dossier-sec-title">01. EXECUTIVE SUMMARY</h3>
+          <p>
+            First-year Computer Science and Engineering undergraduate at Jain University with demonstrated commitment to evidence-led, practical technology. Experience spanning college festival logistics coordination for 2,800+ participants, edge IoT agronomy systems, privacy-preserving proofs, and fintech treasury architectures. Serving as Outreach Leader for FORGE (Jain Launchpad startup incubator).
+          </p>
+        </div>
+
+        <div class="dossier-section">
+          <h3 class="dossier-sec-title">02. ACADEMIC FOUNDATION</h3>
+          <div class="dossier-item">
+            <div class="dossier-item-head">
+              <strong>B.Tech — Computer Science and Engineering</strong>
+              <span>First Year Undergraduate (2026 Cohort)</span>
+            </div>
+            <div class="dossier-item-sub">Jain (Deemed-to-be) University, Bengaluru, Karnataka, India</div>
+            <div class="dossier-item-desc">
+              Focus areas: Object-Oriented Programming, Computational Logic, Algorithm Design, Practical Software Platforms.
+            </div>
+          </div>
+        </div>
+
+        <div class="dossier-section">
+          <h3 class="dossier-sec-title">03. LEADERSHIP &amp; CAMPUS GOVERNANCE</h3>
+          <div class="dossier-item">
+            <div class="dossier-item-head">
+              <strong>Outreach Leader — FORGE (Entrepreneurship &amp; Innovation Club)</strong>
+              <span>Jain Launchpad Ecosystem</span>
+            </div>
+            <div class="dossier-item-sub">Leadership team: Hriday (President), Vard (Vice President), Jitesh Kumar Reddy (Outreach Leader)</div>
+            <ul class="dossier-bullets">
+              <li>Mobilize student entrepreneurs and technical builders into incubation, grant pathways, and angel mentorship.</li>
+              <li>Coordinate inter-university hackathon delegations and organize industry-backed technical venture clinics.</li>
+              <li>Communicate funding and competitive opportunities to thousands of engineering students across Jain University.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="dossier-section">
+          <h3 class="dossier-sec-title">04. PROJECT &amp; HACKATHON REPERTOIRE</h3>
+          
+          <div class="dossier-project">
+            <strong>FestOS — Festival Operations Control Portal</strong> [Hackathon Prototype • Aarohan 2026, IIM Indore]
+            <p>Engineered unified operations dashboard coordinating 2,836 delegates, 38 university contingents, 31 competitions, 9 venues, 1,450 accommodation beds, and 15 vendors managed by 48 organizers over 3 shifts.</p>
+          </div>
+
+          <div class="dossier-project">
+            <strong>Smart Farming Assistant — AI + IoT Agritech</strong> [Smart India Hackathon Track]
+            <p>Field-oriented hardware and AI decision platform utilizing ESP8266 microcontrollers, soil-moisture sensors, and DHT22 probes to trigger automated 5V relay irrigation pumps and deliver offline disease recommendations.</p>
+          </div>
+
+          <div class="dossier-project">
+            <strong>TRUSTMESH — Proof-of-Reality Protocol</strong> [Privacy-Preserving Prototype Spec]
+            <p>Architected decentralized zero-knowledge verification system for proving real-world disaster occurrences without compromising citizen identity records. Implemented via React Native, Expo, and TypeScript.</p>
+          </div>
+
+          <div class="dossier-project">
+            <strong>Exchequer / ApexTreasury</strong> [Fintech SaaS Architecture]
+            <p>Treasury management and automated multi-currency ring-fencing for Indian exporters receiving foreign revenue, built upon Supabase Edge Functions, PostgreSQL RLS, and HMAC-SHA256 authenticated webhooks.</p>
+          </div>
+
+          <div class="dossier-project">
+            <strong>OfflinePay</strong> [Distributed Systems Exploration]
+            <p>Offline payment continuity protocol utilizing BLE and signed dynamic QR payloads with bounded double-spend risk and eventual ledger reconciliation for network-compromised environments.</p>
+          </div>
+
+        </div>
+
+        <div class="dossier-section">
+          <h3 class="dossier-sec-title">05. TECHNICAL INVENTORY</h3>
+          <p>
+            <strong>Programming:</strong> Python (Applied academic practice, automation, data structures), C/C++ exposure.<br>
+            <strong>Web &amp; Frontend:</strong> Web portals, Responsive UI, DOM APIs, React Native/Expo, TypeScript/JavaScript concepts.<br>
+            <strong>IoT &amp; Hardware:</strong> ESP8266, DHT22, Capacitive Soil-Moisture Sensors, Optocoupled 5V Relays, Serial Telemetry.<br>
+            <strong>Security &amp; Cloud:</strong> Supabase, Edge Functions, PostgreSQL Row-Level Security, HMAC-SHA256, Replay Mitigation.
+          </p>
+        </div>
+
+        <div class="dossier-footer-sign">
+          <div>DOCUMENT DIGEST: <code>SHA256:7D9A4C01E...VALID</code></div>
+          <div>VERIFIED FOR OFFICIAL DISSEMINATION • 2026</div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
